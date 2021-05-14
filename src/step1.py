@@ -16,6 +16,7 @@ def split_list(file_name):
 
     prep_id = 1
     for chunk in list_json_chunks:
+        total_size=0
         with open(f'output_step1/input_split_%s' % prep_id, "w", encoding='utf-8') as output_file:
             for job in chunk:
                 try:
@@ -24,7 +25,7 @@ def split_list(file_name):
                     arch_path = json.loads(job.get('ArchiveDescription')).get('path')
                 except JSONDecodeError as je:
                     arch_path = base64.b64decode(re.compile('<p>(.*?)</p>').search(job.get('ArchiveDescription')).group(1))
-                    logging.info(arch_path)
+                    # logging.info(arch_path)
                 except Exception as e:
                     logging.error(e)
                     logging.error(job)
@@ -32,6 +33,8 @@ def split_list(file_name):
 
                 output_file.write('%s|||%s|||%s' % (arch_id, arch_path, arch_size))
                 output_file.write('\n')
+                total_size = total_size + arch_size
+        logging.info("part %s size %.2f GB", prep_id, total_size/1024./1024./1024.)
         prep_id = prep_id + 1
 
 
