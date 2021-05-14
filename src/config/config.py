@@ -17,6 +17,7 @@ GL_KEY = ''
 GL_SECRET = ''
 GL_VAULT = ''
 GL_REGION = ''
+GL_TIER = 'Bulk'
 
 # s3
 S3_KEY = ''

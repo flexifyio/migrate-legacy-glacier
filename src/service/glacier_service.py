@@ -1,5 +1,5 @@
 from client.glacier_client import GlacierClient
-from config.config import GL_VAULT, CHUNK_SIZE
+from config.config import GL_VAULT, CHUNK_SIZE, GL_TIER
 
 
 class GlacierService:
@@ -13,7 +13,8 @@ class GlacierService:
             jobParameters={
                 'Type': 'archive-retrieval',
                 'ArchiveId': arch_id,
-                'Description': ''})
+                'Description': '',
+                'Tier:': GL_TIER})
 
     def fetch_jobs(self):
         pass
