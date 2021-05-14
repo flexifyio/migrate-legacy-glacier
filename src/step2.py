@@ -1,8 +1,8 @@
 import logging
 
-from src.config.config import PROCESSING_SPLIT
-from src.config.log_conf import initialize_logging
-from src.service.glacier_service import GlacierService
+from config.config import PROCESSING_SPLIT
+from config.log_conf import initialize_logging
+from service.glacier_service import GlacierService
 
 
 def init_jobs(file_name):

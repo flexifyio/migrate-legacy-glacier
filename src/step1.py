@@ -4,8 +4,8 @@ import logging
 import re
 from json.decoder import JSONDecodeError
 
-from src.config.config import SPLIT_SIZE, INVENTORY_JSON
-from src.config.log_conf import initialize_logging
+from config.config import SPLIT_SIZE, INVENTORY_JSON
+from config.log_conf import initialize_logging
 
 
 def split_list(file_name):

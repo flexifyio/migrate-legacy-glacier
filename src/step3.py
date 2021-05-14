@@ -2,9 +2,9 @@ import concurrent
 import logging
 from concurrent.futures.thread import ThreadPoolExecutor
 
-from src.config.config import UPLOAD_THREADS
-from src.config.log_conf import initialize_logging
-from src.service.migration_service import MigrationService
+from config.config import UPLOAD_THREADS
+from config.log_conf import initialize_logging
+from service.migration_service import MigrationService
 
 
 def migrate():
