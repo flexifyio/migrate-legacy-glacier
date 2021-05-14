@@ -17,7 +17,6 @@ def init_jobs(file_name):
     with open(f'output_step1/%s' % file_name, encoding='utf-8') as input_file:
         archs = input_file.readlines()[skip_size:]
 
-    job_ids = []
     service = GlacierService()
 
     with open(f'output_step2/input_jobs', "w", encoding='utf-8') as output_file:

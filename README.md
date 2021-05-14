@@ -1,8 +1,8 @@
 ## Step 0: Get inventory from Amazon Glacier
 ```sh
-aws glacier initiate-job --account-id - --region us-east-1 --profile glacier --vault-name flexify-glacier --job-parameters '{"Type": "inventory-retrieval"}'
-aws glacier describe-job --account-id - --region us-east-1 --profile glacier --vault-name flexify-glacier --job-id '…..'
-aws glacier get-job-output  --account-id - --region us-east-1 --profile glacier --vault-name flexify-glacier --job-id '…' output.json
+aws glacier initiate-job --account-id - --vault-name flexify-glacier --job-parameters '{"Type": "inventory-retrieval"}'
+aws glacier describe-job --account-id - --vault-name flexify-glacier --job-id '…..'
+aws glacier get-job-output  --account-id - --vault-name flexify-glacier --job-id '…' inventory.json
 ```
 
 ## Step 1: Split inventory file
