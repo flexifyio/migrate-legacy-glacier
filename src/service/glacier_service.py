@@ -14,7 +14,7 @@ class GlacierService:
                 'Type': 'archive-retrieval',
                 'ArchiveId': arch_id,
                 'Tier': 'Bulk',
-                'Description': 'Restoring ' + arch_path})
+                'Description': 'Restore by Flexify'})
 
     def fetch_jobs(self):
         pass
