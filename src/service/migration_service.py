@@ -5,6 +5,7 @@ from service.s3_service import S3Service
 
 class MigrationService:
     def __init__(self, key):
+        key = key if key[:1] != '/' else key[1:]
         self._s3_service = S3Service()
         self._glacier_service = GlacierService()
         self._s3_service.init_upload(key)
