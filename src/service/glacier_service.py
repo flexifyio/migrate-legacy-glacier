@@ -13,7 +13,7 @@ class GlacierService:
             jobParameters={
                 'Type': 'archive-retrieval',
                 'ArchiveId': arch_id,
-                'Description': 'Restoring ' + arch_path,
+                'Description': 'Restore by Flexify',
                 'Tier:': GL_TIER})
 
     def fetch_jobs(self):
