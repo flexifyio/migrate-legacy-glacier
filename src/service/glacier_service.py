@@ -1,5 +1,5 @@
-from src.client.glacier_client import GlacierClient
-from src.config.config import GL_VAULT, CHUNK_SIZE
+from client.glacier_client import GlacierClient
+from config.config import GL_VAULT, CHUNK_SIZE
 
 
 class GlacierService:

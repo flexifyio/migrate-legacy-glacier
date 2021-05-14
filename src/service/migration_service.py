@@ -1,6 +1,6 @@
-from src.service.custom_multipart_upload import Status
-from src.service.glacier_service import GlacierService
-from src.service.s3_service import S3Service
+from service.custom_multipart_upload import Status
+from service.glacier_service import GlacierService
+from service.s3_service import S3Service
 
 
 class MigrationService:

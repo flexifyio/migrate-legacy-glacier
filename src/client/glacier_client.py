@@ -1,7 +1,7 @@
 import boto3
 from botocore.config import Config
 
-from src.config.config import GL_KEY, GL_SECRET, GL_REGION
+from config.config import GL_KEY, GL_SECRET, GL_REGION
 
 
 class GlacierClient:

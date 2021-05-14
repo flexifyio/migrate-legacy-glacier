@@ -1,6 +1,6 @@
-from src.client.s3_client import ClientManager
-from src.config.config import S3_BUCKET
-from src.service.custom_multipart_upload import CustomMultipart
+from client.s3_client import ClientManager
+from config.config import S3_BUCKET
+from service.custom_multipart_upload import CustomMultipart
 
 
 class S3Service:

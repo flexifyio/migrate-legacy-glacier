@@ -1,7 +1,7 @@
 import boto3
 from botocore.config import Config
 
-from src.config.config import S3_KEY, S3_SECRET, S3_REGION
+from config.config import S3_KEY, S3_SECRET, S3_REGION
 
 
 class ClientManager:
