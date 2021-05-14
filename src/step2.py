@@ -13,8 +13,8 @@ def init_jobs(file_name):
     service = GlacierService()
 
     for arch in archs:
-        arc_name, arch_path, arch_size = arch.split(' ')
-        job_ids.append('%s %s %s' % (service.create_jobs(arc_name).get('jobId'), arch_path, arch_size))
+        arc_name, arch_path, arch_size = arch.split('|||')
+        job_ids.append('%s|||%s|||%s' % (service.create_jobs(arc_name).get('jobId'), arch_path, arch_size))
         logging.info("initiated for %s" % arch)
 
     with open(f'output_step2/input_jobs', "w", encoding='utf-8') as output_file:

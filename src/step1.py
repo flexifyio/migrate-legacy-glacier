@@ -30,7 +30,7 @@ def split_list(file_name):
                     logging.error(job)
                     raise e
 
-                output_file.write('%s %s %s' % (arch_id, arch_path, arch_size))
+                output_file.write('%s|||%s|||%s' % (arch_id, arch_path, arch_size))
                 output_file.write('\n')
         prep_id = prep_id + 1
 
