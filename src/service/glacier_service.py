@@ -23,7 +23,7 @@ class GlacierService:
         start = 0
         while True:
             end = arch_size - 1 if start + CHUNK_SIZE > arch_size else start + CHUNK_SIZE
-            yield self._client.get_job_output(vaultName=self._vault, jobId=job_id, range='%s-%s'.format(start, end))
+            yield self._client.get_job_output(vaultName=self._vault, jobId=job_id, range='bytes={}-{}'.format(start, end))
             start = end + 1
 
             if end == arch_size - 1:
