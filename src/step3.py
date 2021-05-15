@@ -16,8 +16,8 @@ def migrate():
             futures = []
             for job in list_jobs:
                 job_id, arch_path, arch_size = job.split('|||')
-                migration_service = MigrationService(arch_path)
-                futures.append(executor.submit(migration_service.migrate, job_id=job_id, size=int(arch_size)))
+                migration_service = MigrationService()
+                futures.append(executor.submit(migration_service.migrate, job_id=job_id, key=arch_path, size=int(arch_size)))
 
             for future in concurrent.futures.as_completed(futures):
                 try:

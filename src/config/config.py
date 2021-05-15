@@ -13,14 +13,14 @@ UPLOAD_THREADS = 5
 CHUNK_SIZE = 6 * 1024 * 1024
 
 # glacier
-GL_KEY = ''
-GL_SECRET = ''
-GL_VAULT = ''
-GL_REGION = ''
+GL_KEY = 'AKIAVHCLHRT4DJF652NK'
+GL_SECRET = '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'
+GL_VAULT = 'flexify-glacier'
+GL_REGION = 'us-east-1'
 GL_TIER = 'Bulk'
 
 # s3
-S3_KEY = ''
-S3_SECRET = ''
-S3_BUCKET = ''
-S3_REGION = ''
+S3_KEY = 'AKIAIVW6TZW6Q4MBZZ7A'
+S3_SECRET = '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'
+S3_BUCKET = 'flexify'
+S3_REGION = 'us-east-1'

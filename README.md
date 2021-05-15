@@ -21,7 +21,7 @@ aws glacier get-job-output  --account-id - --vault-name <vault> --job-id '<job-i
 
 *Wait for jobs to complete*
 
-# Step: Copy archive to S3
+# Step: Copy restored archives to S3
 1. Make sure jobs complete
 2. Configure S3 options in `src/config/config.py`
 3. Create directory `output_step3`
