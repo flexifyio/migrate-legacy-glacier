@@ -9,7 +9,7 @@ def init_jobs(file_name):
     skip_size = 0
 
     try:
-        with open('/output_step2/input_jobs') as input_jobs:
+        with open(f'output_step2/input_jobs') as input_jobs:
             skip_size = len(input_jobs.readlines())
     except IOError:
         print("Output file input_jobs was not created yet")
@@ -21,8 +21,8 @@ def init_jobs(file_name):
 
     with open(f'output_step2/input_jobs', "w", encoding='utf-8') as output_file:
         for arch in archs:
-            arc_name, arch_path, arch_size = arch.split('|||')
-            output_file.write('%s|||%s|||%s' % (service.create_jobs(arc_name).get('jobId'), arch_path, arch_size))
+            arc_id, arch_path, arch_size = arch.split('|||')
+            output_file.write('%s|||%s|||%s' % (service.create_jobs(arc_id).get('jobId'), arch_path, arch_size))
             logging.info("Job initiated for %s" % arch)
 
 

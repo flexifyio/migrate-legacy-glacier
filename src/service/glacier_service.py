@@ -7,14 +7,14 @@ class GlacierService:
         self._client = GlacierClient().get_client()
         self._vault = GL_VAULT
 
-    def create_jobs(self, arch_id, arch_path):
+    def create_jobs(self, arch_id):
         return self._client.initiate_job(
             vaultName=self._vault,
             jobParameters={
                 'Type': 'archive-retrieval',
                 'ArchiveId': arch_id,
                 'Description': 'Restore by Flexify',
-                'Tier:': GL_TIER})
+                'Tier': GL_TIER})
 
     def fetch_jobs(self):
         pass
