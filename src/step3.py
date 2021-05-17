@@ -27,6 +27,7 @@ def migrate():
                         try:
                             result = future.result()
                             output_file.write(result + '\n')
+                            logging.info('Done job %s' % result)
                             output_file.flush()
                         except Exception as e:
                             logging.error(e)
