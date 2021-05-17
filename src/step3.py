@@ -36,7 +36,8 @@ def migrate():
                             errors_file.flush()
                         futures.remove(future)
                         del(future)
-                        logging.debug('Collected %s', gc.collect())
+                    del finished
+                    logging.debug('Collected %s', gc.collect())
 
 
 if __name__ == '__main__':
