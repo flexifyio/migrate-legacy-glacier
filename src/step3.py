@@ -24,15 +24,17 @@ def migrate():
 
                 while futures:
                     finished, unfinished = concurrent.futures.wait(futures, timeout=None, return_when=FIRST_COMPLETED)
+                    logging.debug('FINISHED %s', len(finished))
                     for future in finished:
                         try:
                             result = future.result()
+                            logging.info('DONE job %s' % result)
                             output_file.write(result + '\n')
                             output_file.flush()
-                            logging.info('Done job %s' % result)
+                            logging.info('SAVED job %s' % result)
                         except Exception as e:
                             logging.error(e)
-                            errors_file.write('Exception: %s\n' % (e))
+                            errors_file.write('EXCEPTION: %s\n' % (e))
                             errors_file.flush()
                         futures.remove(future)
                         del(future)
