@@ -33,7 +33,7 @@ class CustomMultipart:
             response = self.__s3.create_multipart_upload(Bucket=self.__bucket, Key=self.__key)
             self.__upload_id = response.get('UploadId')
             self.__status = Status.ACTIVE
-            logging.debug("multipart upload successfully initiated with id: %s" % self.__upload_id)
+            logging.debug("%s: multipart upload initiated with id: %s" % (self.__key, self.__upload_id))
             return response
         except ClientError as e:
             self.__status = Status.ERROR
@@ -43,7 +43,7 @@ class CustomMultipart:
     def upload_next_chunk(self, chunk: StreamingBody):
         if self.__status == Status.ACTIVE:
             try:
-                logging.debug("uploading part %s for %s" % (self.__iterator, self.__key))
+                logging.debug("%s: uploading part %s" % (self.__key, self.__iterator))
                 response = self.__s3.upload_part(Bucket=self.__bucket, Key=self.__key, PartNumber=self.__iterator,
                                           UploadId=self.__upload_id, Body=chunk.read())
                 self.__uploaded_parts.append({
@@ -51,22 +51,23 @@ class CustomMultipart:
                     'ETag': response.get('ETag')
                 })
             except StopIteration as e:
-                logging.debug("all parts were uploaded")
+                logging.debug("%s: all parts were uploaded" % self.__key)
             except ClientError as e:
                 self.__status = Status.ERROR
                 logging.error("upload of a part of a file ended up with an error: %s" % e)
                 return e
             else:
-                logging.debug("part: %s was uploaded" % self.__iterator)
+                logging.debug("%s: part %s uploaded" % (self.__key, self.__iterator))
                 self.__iterator = self.__iterator + 1
                 return response
 
     def complete_upload(self):
         try:
-            logging.debug("trying to complete multipart upload with id: %s" % self.__upload_id)
+            logging.debug("%s: completing multipart upload with id: %s" % (self.__key, self.__upload_id))
             parts_info = {'Parts': self.__uploaded_parts}
             response = self.__s3.complete_multipart_upload(Bucket=self.__bucket, Key=self.__key,
                                                            UploadId=self.__upload_id, MultipartUpload=parts_info)
+            logging.info("%s: COMPLETED" % self.__key)
             self.__status = Status.COMPLETED
             return response
         except ClientError as e:

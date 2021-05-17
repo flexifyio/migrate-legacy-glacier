@@ -1,6 +1,7 @@
 import concurrent
 import logging
 from concurrent.futures.thread import ThreadPoolExecutor
+from concurrent.futures import FIRST_COMPLETED
 
 from config.config import UPLOAD_THREADS
 from config.log_conf import initialize_logging
@@ -21,13 +22,17 @@ def migrate():
                     futures.append(executor.submit(migration_service.migrate, job_id=job_id, key=arch_path, size=int(arch_size)))
 
                 while futures:
-                    future = futures[0]
-                    try:
-                        output_file.write(future.result() + '\n')
-                    except Exception as e:
-                        logging.error(e)
-                        errors_file.write('Exception: %s\n' % (e))
-                    futures.pop(0)
+                    finished, unfinished = concurrent.futures.wait(futures, timeout=None, return_when=FIRST_COMPLETED)
+                    for future in finished:
+                        try:
+                            result = future.result()
+                            output_file.write(result + '\n')
+                            output_file.flush()
+                        except Exception as e:
+                            logging.error(e)
+                            errors_file.write('Exception: %s\n' % (e))
+                            errors_file.flush()
+                        futures.remove(future)
 
 
 if __name__ == '__main__':

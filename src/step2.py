@@ -23,6 +23,7 @@ def init_jobs(file_name):
         for arch in archs:
             arc_id, arch_path, arch_size = arch.split('|||')
             output_file.write('%s|||%s|||%s' % (service.create_jobs(arc_id).get('jobId'), arch_path, arch_size))
+            output_file.flush()
             logging.info("Job initiated for %s" % arch)
 
 
