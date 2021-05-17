@@ -1,5 +1,6 @@
 import concurrent
 import logging
+import gc
 from concurrent.futures.thread import ThreadPoolExecutor
 from concurrent.futures import FIRST_COMPLETED
 
@@ -27,13 +28,15 @@ def migrate():
                         try:
                             result = future.result()
                             output_file.write(result + '\n')
-                            logging.info('Done job %s' % result)
                             output_file.flush()
+                            logging.info('Done job %s' % result)
                         except Exception as e:
                             logging.error(e)
                             errors_file.write('Exception: %s\n' % (e))
                             errors_file.flush()
                         futures.remove(future)
+                        del(future)
+                        logging.debug('Collected %s', gc.collect())
 
 
 if __name__ == '__main__':
