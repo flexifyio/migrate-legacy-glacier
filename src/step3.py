@@ -34,7 +34,7 @@ def migrate():
                             logging.info('DONE job %s' % result)
                             output_file.write(result + '\n')
                             output_file.flush()
-                            logging.info('SAVED job %s' % result)
+                            logging.debug('SAVED job %s' % result)
                         except Exception as e:
                             logging.error(e)
                             errors_file.write('EXCEPTION: %s\n' % (e))
