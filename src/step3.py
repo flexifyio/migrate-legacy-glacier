@@ -25,7 +25,7 @@ def migrate():
                         migration_service = MigrationService()
                         futures.append(executor.submit(migration_service.migrate, job_id=job_id, key=arch_path, size=int(arch_size)))
 
-                    # wait of at least on thread to complete
+                    # wait for at least one thread to complete
                     finished, unfinished = concurrent.futures.wait(futures, timeout=None, return_when=FIRST_COMPLETED)
                     logging.debug('FINISHED %s future(s)', len(finished))
                     for future in finished:
