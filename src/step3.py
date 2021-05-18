@@ -15,7 +15,7 @@ def migrate():
 
     with open(f'output_step3/completed_jobs', "w", encoding='utf-8') as output_file:
         with open(f'output_step3/errors', "w", encoding='utf-8') as errors_file:
-            with ThreadPoolExecutor(max_workers=UPLOAD_THREADS) as executor:
+            with ThreadPoolExecutor() as executor:
                 futures = []
                 while list_jobs or futures:
                     # add theads up to target value
