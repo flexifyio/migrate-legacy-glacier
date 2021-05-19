@@ -9,5 +9,11 @@ __pycache__
 .pytest_cache
 src/__pycache__
 src/config/__pycache__
-/input*
-/output*
+/input_step1/*
+!/input_step1/.keep
+/output_step1/*
+!/output_step1/.keep
+/output_step2/*
+!/output_step2/.keep
+/output_step3/*
+!/output_step3/.keep
