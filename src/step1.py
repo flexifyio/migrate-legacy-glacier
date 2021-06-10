@@ -4,7 +4,7 @@ import logging
 import re
 from json.decoder import JSONDecodeError
 
-from config.config import SPLIT_SIZE, INVENTORY_JSON
+from config.config import SPLIT_SIZE, INVENTORY_JSON, DESCRIPTION_FORMAT
 from config.log_conf import initialize_logging
 
 
@@ -22,9 +22,16 @@ def split_list(file_name):
                 try:
                     arch_id = job.get('ArchiveId')
                     arch_size = job.get('Size')
-                    arch_path = json.loads(job.get('ArchiveDescription')).get('path')
-                except JSONDecodeError as je:
-                    arch_path = base64.b64decode(re.compile('<p>(.*?)</p>').search(job.get('ArchiveDescription')).group(1))
+                    arc_description = job.get('ArchiveDescription')
+                    if DESCRIPTION_FORMAT == 'PATH':
+                        arch_path = arc_description
+                    elif DESCRIPTION_FORMAT == 'JSON':
+                        try:
+                            arch_path = json.loads(arc_description).get('path')
+                        except JSONDecodeError as je:
+                            arch_path = base64.b64decode(re.compile('<p>(.*?)</p>').search(arc_description).group(1))
+                    else:
+                        raise ValueError('Unknown value of DESCRIPTION_FORMAT. Check configuration')
                     # logging.info(arch_path)
                 except Exception as e:
                     logging.error(e)
