@@ -22,7 +22,7 @@ class GlacierService:
     def chunk_generator(self, job_id, arch_size):
         start = 0
         while True:
-            end = arch_size - 1 if start + CHUNK_SIZE > arch_size else start + CHUNK_SIZE
+            end = arch_size - 1 if start + CHUNK_SIZE >= arch_size else start + CHUNK_SIZE - 1
             yield self._client.get_job_output(vaultName=self._vault, jobId=job_id, range='bytes={}-{}'.format(start, end))
             start = end + 1
 
