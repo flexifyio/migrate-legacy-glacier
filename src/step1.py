@@ -29,7 +29,8 @@ def split_list(file_name):
                         try:
                             arch_path = json.loads(arc_description).get('path')
                         except JSONDecodeError as je:
-                            arch_path = base64.b64decode(re.compile('<p>(.*?)</p>').search(arc_description).group(1))
+                            enc_arch_path = base64.b64decode(re.compile('<p>(.*?)</p>').search(arc_description).group(1))
+                            arch_path = enc_arch_path.decode()
                     else:
                         raise ValueError('Unknown value of DESCRIPTION_FORMAT. Check configuration')
                     # logging.info(arch_path)
@@ -38,10 +39,14 @@ def split_list(file_name):
                     logging.error(job)
                     raise e
 
+                if arch_path is None:
+                    logging.warning('None arch_path for %s', arch_id)
+                    continue
+
                 output_file.write('%s|||%s|||%s' % (arch_id, arch_path, arch_size))
                 output_file.write('\n')
                 total_size = total_size + arch_size
-        logging.info("part %s size %.2f GB", prep_id, total_size/1024./1024./1024.)
+        logging.info("part %s size %.2f GB (%d bytes)", prep_id, total_size/1024./1024./1024., total_size)
         prep_id = prep_id + 1
 
 
