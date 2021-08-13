@@ -7,9 +7,10 @@ aws glacier get-job-output  --account-id - --vault-name <vault> --job-id '<job-i
 
 ## Step 1: Split inventory file
 1. Put `inventory.json` to `input_step1` directory
-2. Edit `src/config/config.py` and set `INVENTORY_JSON` to the name of the inventory file
-3. Run `python3 src/step1.py`
-4. See parts inside `output_step1`
+2. Copy `src/config/config_example.py` to `src/config/config.py`
+3. Edit `src/config/config.py` and set `INVENTORY_JSON` to the name of the inventory file
+4. Run `python3 src/step1.py`
+5. See parts inside `output_step1`
 
 # Step 2: Run Glacier restore jobs
 1. Set `PROCESSING_SPLIT` in `src/config/config.py` to the part you'd like to process
