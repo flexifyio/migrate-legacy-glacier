@@ -12,7 +12,7 @@ aws glacier get-job-output  --account-id - --vault-name <vault> --job-id '<job-i
 4. Run `python3 src/step1.py`
 5. See parts inside `output_step1`
 
-# Step 2: Run Glacier restore jobs
+## Step 2: Run Glacier restore jobs
 1. Set `PROCESSING_SPLIT` in `src/config/config.py` to the part you'd like to process
 2. Configure Glacier properties in `src/config/config.py`
 3. Run `python3 src/step2.py`
@@ -20,7 +20,7 @@ aws glacier get-job-output  --account-id - --vault-name <vault> --job-id '<job-i
 
 *Wait for jobs to complete*
 
-# Step: Copy restored archives to S3
+## Step 3: Copy restored archives to S3
 1. Make sure jobs complete
 2. Configure S3 options in `src/config/config.py`
 3. Rub copy with `python3 src/step3.py`
